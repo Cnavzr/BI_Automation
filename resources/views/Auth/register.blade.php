@@ -4,7 +4,7 @@
 <head>
     <!-- Title Meta -->
     <meta charset="utf-8"/>
-    <title>  ثبت نام | مجتمع فرهیختگان سراج</title>
+    <title>  ثبت نام </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A fully responsive premium admin dashboard template"/>
     <meta name="author" content="Ferdoc"/>
@@ -29,19 +29,19 @@
                     <div class="col-lg-6 py-lg-5">
                         <div class="d-flex flex-column h-100 justify-content-center">
                             <div class="auth-logo mb-4">
-                                <a href="{{ route('dashboard') }}" class="logo-dark">
-                                    <img src="{{asset('images/logo.png')}}" height="80" alt="مدرسه فرهیختگان سراج">
-                                </a>
+{{--                                <a href="{{ route('dashboard') }}" class="logo-dark">--}}
+{{--                                    <img src="{{asset('images/logo.png')}}" height="80">--}}
+{{--                                </a>--}}
 
-                                <a href="{{ route('dashboard') }}" class="logo-light">
-                                    <img src="{{asset('images/logo.png')}}" height="80" alt="مدرسه فرهیختگان سراج">
-                                </a>
+{{--                                <a href="{{ route('dashboard') }}" class="logo-light">--}}
+{{--                                    <img src="{{asset('images/logo.png')}}" height="80">--}}
+{{--                                </a>--}}
                             </div>
 
                             <h2 class="fw-bold fs-24">ثبت نام</h2>
 
                             <p class="text-muted mt-1 mb-4">
-                                سامانه پیش ثبت نام مجتمع فرهیختگان سراج
+                                سامانه تحلیل داده مشتریان سازمانی
                             </p>
                             @if ($errors->any())
                                 <div class="alert alert-danger" role="alert">

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\SmsHelper;
+use App\Helpers\SMSHelper;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -23,18 +23,6 @@ class AuthController extends Controller
             return redirect(route('dashboard'));
         }
         return view('Auth.verify');
-    }
-    public function vorodPage(){
-        if(Auth::check()){
-            return redirect(route('dashboard'));
-        }
-        return view('Auth.vorod');
-    }
-    public function verifyVorodPage(){
-        if(Auth::check()){
-            return redirect(route('dashboard'));
-        }
-        return view('Auth.verify-otp');
     }
 
     public function sendCode(Request $request)
@@ -68,7 +56,7 @@ class AuthController extends Controller
         ]);
 
         $message = "کد تأیید شما: $verification_code \nلغو۱۱";
-        SmsHelper::sendSms($user->mobile, $message);
+        SMSHelper::sendSms($user->mobile, $message);
 
         return redirect()->route('verify')->with('mobile', $request->mobile);
     }
@@ -98,37 +86,6 @@ class AuthController extends Controller
 
         Auth::login($user);
         return redirect()->intended('dashboard');
-    }
-
-    public function sendVorodCode(Request $request)
-    {
-        $validatedData = $request->validate([
-            'mobile' => 'required|digits:11|regex:/^09[0-9]{9}$/',
-        ], [
-            'mobile.required' => 'وارد کردن شماره موبایل اجباری است.',
-            'mobile.digits' => 'شماره موبایل می بایست 11 رقم باشد.',
-            'mobile.regex' => 'لطفا فقط اعداد انگلیسی وارد کنید.',
-        ]);
-        $mobile = $request->mobile;
-        $user = User::where('mobile', $mobile)->first();
-
-        if (!$user) {
-            return back()->withErrors(['mobile' => 'این شماره در سیستم ثبت نشده است.']);
-        }
-
-
-        $verification_code = rand(100000, 999999); // تولید کد ۶ رقمی
-        $expires_at = now()->addMinutes(5); // انقضای کد ۵ دقیقه بعد
-
-        $user->update([
-            'verification_code' => $verification_code,
-            'verification_expires_at' => $expires_at,
-        ]);
-
-        $message = "کد تأیید شما: $verification_code \nلغو۱۱";
-        SmsHelper::sendSms($user->mobile, $message);
-
-        return redirect()->route('verify')->with('mobile', $request->mobile);
     }
 
     public function logout(Request $request)

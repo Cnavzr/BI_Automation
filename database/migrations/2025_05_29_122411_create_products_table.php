@@ -15,9 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('product_name')->nullable();
             $table->string('category_name')->nullable();
-            $table->string('company_id')->nullable();
-            $table->string('is_salable')->nullable();
-            $table->string('is_available')->nullable();
+            $table->boolean('is_salable')->default(true);
+            $table->boolean('is_available')->default(true);
             $table->timestamps();
         });
     }

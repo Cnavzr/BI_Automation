@@ -127,37 +127,8 @@
                             </span>
                         <span class="nav-text"> مدیریت پنل </span>
                     </a>
-                    <div class="collapse" id="sidebarRequests">
-                        <ul class="nav sub-navbar-nav">
-                            <li class="sub-nav-item">
-                                <a class="sub-nav-link" href="{{route('applyList')}}">مدیریت درخواست ها</a>
-                            </li>
-                            <li class="sub-nav-item">
-                                <a class="sub-nav-link" href="{{route('filterApply')}}">جستجوی پیشرفته</a>
-                            </li>
-                            <li class="sub-nav-item">
-                                <a class="sub-nav-link" href="{{route('levelList')}}">مدیریت مقاطع</a>
-                            </li>
-                        </ul>
-                    </div>
                 </li>
                 @endrole
-{{--                <li class="nav-item">--}}
-{{--                    <a class="nav-link" href="{{route('addApplyPage')}}">--}}
-{{--                            <span class="nav-icon">--}}
-{{--                                <iconify-icon icon="solar:pen-new-square-bold-duotone"></iconify-icon>--}}
-{{--                            </span>--}}
-{{--                        <span class="nav-text"> درخواست پیش ثبت نام </span>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
-                <li class="nav-item">
-                    <a class="nav-link" href="{{route('applyList')}}">
-                            <span class="nav-icon">
-                                <iconify-icon icon="solar:pen-new-square-bold-duotone"></iconify-icon>
-                            </span>
-                        <span class="nav-text"> درخواست های من </span>
-                    </a>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('logout')}}">
                             <span class="nav-icon">
