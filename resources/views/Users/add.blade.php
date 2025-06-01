@@ -45,18 +45,21 @@
 
                                 <div class="col-lg-6">
                                     <div class="mb-3">
-                                        <label for="relation" class="form-label">نسبت با دانش آموز</label>
-                                        <select class="form-select" id="relation" name="relation">
-                                            <option value="">لطفا یک نسبت را تعیین کنید</option>
-                                            <option value="پدر">پدر</option>
-                                            <option value="مادر">مادر</option>
-                                            <option value="پدربزرگ">پدربزرگ</option>
-                                            <option value="مادربزرگ">مادربزرگ</option>
-                                            <option value="قیم">قیم</option>
+                                        <label for="company" class="form-label">شرکت</label>
+                                        <input type="text" id="company" name="company" class="form-control" placeholder="نام شرکت را وارد نمایید.">
+                                    </div>
+                                </div>
 
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label for="status" class="form-label">وضعیت کاربر</label>
+                                        <select class="form-select" id="status" name="status">
+                                            <option value="0">فعال</option>
+                                            <option value="1">غیرفعال</option>
                                         </select>
                                     </div>
                                 </div>
+
                                 <div class="col-lg-6">
                                     <div class="mb-3">
                                         <label for="role" class="form-label">نقش کاربر</label>
@@ -65,7 +68,6 @@
                                             @foreach($roles as $role)
                                                 <option value="{{$role->name}}">{{$role->name}}</option>
                                             @endforeach
-
                                         </select>
                                     </div>
                                 </div>

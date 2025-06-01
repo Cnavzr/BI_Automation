@@ -4,7 +4,7 @@
 <head>
     <!-- Title Meta -->
     <meta charset="utf-8" />
-    <title>سامانه پیش ثبت نام | مجتمع فرهیختگان سراج</title>
+    <title>سامانه تحلیل داده</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A fully responsive premium admin dashboard template" />
     <meta name="author" content="Ferdoc" />
@@ -39,7 +39,7 @@
 
                     <!-- عنوان صفحه -->
                     <div class="topbar-item">
-                        <h4 class="fw-bold topbar-button pe-none text-uppercase mb-0">سامانه پیش ثبت نام مجتمع فرهیختگان سراج</h4>
+                        <h4 class="fw-bold topbar-button pe-none text-uppercase mb-0">سامانه تحلیل داده</h4>
                     </div>
                 </div>
 

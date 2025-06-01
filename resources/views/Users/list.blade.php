@@ -76,7 +76,7 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-end">
 {{--                        <a href="#!" class="dropdown-item">PDF</a>--}}
-                        <a href="{{route('exportUserCSV')}}" class="dropdown-item">CSV</a>
+                        <a href="" class="dropdown-item">CSV</a>
                     </div>
                 </div>
             </div>
@@ -87,7 +87,7 @@
                         <tr>
                             <th>نام و نام خانوادگی</th>
                             <th>شماره موبایل</th>
-                            <th>نسبت</th>
+                            <th>شرکت</th>
                             <th>نقش</th>
                             <th>وضعیت</th>
                             <th>عملیات</th>
@@ -98,7 +98,7 @@
                         <tr>
                             <td>{{ $user->firstname.' '.$user->lastname }}</td>
                             <td>{{ $user->mobile }}</td>
-                            <td>{{ $user->relation }}</td>
+                            <td>{{ $user->company ?? '-' }}</td>
                             <td>
                                 @if($user->hasRole('administrator'))
                                     <span class="badge bg-light text-dark py-1 px-2 fs-11">مدیر</span>
@@ -109,11 +109,10 @@
                                 @endif
                             </td>
                             <td>
-
                                 @if($user->status == 1)
-                                    <span class="badge bg-info-subtle text-info py-1 px-2 fs-11">جدیدالورود</span>
+                                    <span class="badge bg-danger-subtle text-danger py-1 px-2 fs-11">غیرفعال</span>
                                 @elseif($user->status == 0)
-                                    <span class="badge bg-primary-subtle text-primary py-1 px-2 fs-11">مشغول به تحصیل</span>
+                                    <span class="badge bg-success-subtle text-success py-1 px-2 fs-11">فعال</span>
                                 @endif
                             </td>
                             <td>

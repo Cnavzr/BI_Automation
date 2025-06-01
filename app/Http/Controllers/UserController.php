@@ -38,7 +38,8 @@ class UserController extends Controller
             'firstname' => 'required|min:3|max:32|string',
             'lastname' => 'required|min:3|max:32|string',
             'mobile' => 'required|numeric|digits:11|unique:users,mobile',
-            'relation' => 'required|in:پدر,مادر,پدربزرگ,مادربزرگ,قیم',
+            'company' => 'nullable|string|max:100',
+            'status' => 'required|in:0,1',
             'role' => [
                 'required',
                 'string',
@@ -64,21 +65,24 @@ class UserController extends Controller
             'mobile.numeric' => 'شماره موبایل فقط شامل اعداد می باشد.',
             'mobile.unique' => 'این شماره موبایل قبلا استفاده شده است.',
 
-            'relation.required' => 'وارد کردن نسبت خانوادگی اجباریست.',
-            'relation.in' => 'مقدار وارد شده معتبر نمی باشد.',
+            'company.string' => 'نام شرکت فقط شامل حروف می باشد.',
+            'company.max' => 'نام شرکت می بایست حدکثر 100 کاراکتر داشته باشد.',
+
+            'status.required' => 'وارد کردن وضعیت کاربر اجباریست.',
+            'status.in' => 'مقدار وارد شده معتبر نمی باشد.',
 
             'role.required' => 'وارد کردن نقش کاربر اجباریست.',
             'role.string' => 'نقش کاربر فقط شامل حروف می باشد.',
-
         ]);
+
         $randomPassword = random_int(10000000, 99999999);
         $hashedPassword = Hash::make($randomPassword);
         $user = User::create([
-            'relation' => $request->relation,
             'firstname' => $request->firstname,
             'lastname' => $request->lastname,
-            'relation' => $request->relation,
             'mobile' => $request->mobile,
+            'company' => $request->company,
+            'status' => $request->status,
             'password' => $hashedPassword,
         ]);
         $user->assignRole($request->role);
@@ -87,7 +91,6 @@ class UserController extends Controller
         SmsHelper::sendSms($user->mobile, $message);
 
         return redirect()->route('userList')->withSuccess('کاربر با موفقیت افزوده شد.');
-
     }
 
     public function editUserPage($id)
@@ -104,7 +107,7 @@ class UserController extends Controller
         $validatedData = $request->validate([
             'firstname' => 'required|min:3|max:32|string',
             'lastname' => 'required|min:3|max:32|string',
-            'relation' => 'required|in:پدر,مادر,پدربزرگ,مادربزرگ,قیم',
+            'company' => 'nullable|string|max:100',
             'status' => 'required|in:0,1',
             'role' => [
                 'required',
@@ -126,27 +129,25 @@ class UserController extends Controller
             'lastname.max' => 'نام خانوادگی کاربر می بایست حدکثر 32 کاراکتر داشته باشد.',
             'lastname.string' => 'نام خانوادگی کاربر فقط شامل حروف می باشد.',
 
-            'relation.required' => 'وارد کردن نسبت خانوادگی اجباریست.',
-            'relation.in' => 'مقدار وارد شده معتبر نمی باشد.',
+            'company.string' => 'نام شرکت فقط شامل حروف می باشد.',
+            'company.max' => 'نام شرکت می بایست حدکثر 100 کاراکتر داشته باشد.',
 
             'status.required' => 'وارد کردن وضعیت کاربر اجباریست.',
             'status.in' => 'مقدار وارد شده معتبر نمی باشد.',
 
-
             'role.required' => 'وارد کردن نقش کاربر اجباریست.',
             'role.string' => 'نقش کاربر فقط شامل حروف می باشد.',
-
         ]);
+
         $user->update([
             'firstname' => $request->firstname,
             'lastname' => $request->lastname,
-            'relation' => $request->relation,
+            'company' => $request->company,
             'status' => $request->status,
         ]);
         $user->syncRoles([]);
         $user->assignRole($request->role);
         return back()->withSuccess('اطلاعات با موفقیت بروزرسانی شد.');
-
     }
 
     public function profilePage()
@@ -161,28 +162,28 @@ class UserController extends Controller
         $user->update([
             'firstname' => $request->firstname,
             'lastname' => $request->lastname,
-            'relation' => $request->relation,
+            'company' => $request->company,
         ]);
 
         return back()->withSuccess('اطلاعات با موفقیت بروزرسانی شد.');
-
     }
 
     public function exportUserCSV()
     {
-        $users = User::all(); // دریافت همه کاربران
+        $users = User::all();
 
-        $csvPath = storage_path('users.csv'); // مسیر ذخیره‌سازی فایل
+        $csvPath = storage_path('users.csv');
 
         $writer = SimpleExcelWriter::create($csvPath)
-            ->addHeader(['نام', 'نام خانوادگی', 'نسبت', 'شماره موبایل']); // اضافه کردن عنوان ستون‌ها
+            ->addHeader(['نام', 'نام خانوادگی', 'شرکت', 'شماره موبایل', 'وضعیت']);
 
         foreach ($users as $user) {
             $writer->addRow([
                 'firstname' => $user->firstname,
                 'lastname' => $user->lastname,
-                'relation' => $user->relation,
+                'company' => $user->company,
                 'mobile' => $user->mobile,
+                'status' => $user->status == 0 ? 'فعال' : 'غیرفعال',
             ]);
         }
 

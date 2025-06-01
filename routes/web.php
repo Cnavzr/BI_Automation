@@ -2,7 +2,9 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ImportController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     if (Auth::check()) {
@@ -27,4 +29,7 @@ Route::group(['middleware' => ['role:administrator']], function () {
     Route::get('/users/{id}/delete', [UserController::class, 'deleteUser'])->name('deleteUser');
     Route::get('/users/{id}/edit', [UserController::class, 'editUserPage'])->name('editUserPage');
     Route::post('/users/{id}/edit', [UserController::class, 'editUserSubmit'])->name('editUserSubmit');
+    
+    // Import routes
+    Route::post('/import/customers', [ImportController::class, 'importCustomers'])->name('importCustomers');
 });

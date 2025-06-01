@@ -39,26 +39,19 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="mb-3">
-                                        <label for="relation" class="form-label"> نسبت کاربر با دانش آموز</label>
-                                        <select class="form-select" id="relation" name="relation">
-                                            <option value="" @if($user->relation== null) selected @endif>لطفا نسبت کاربر با دانش آموز را انتخاب نمایید.</option>
-                                            <option value="پدر" @if($user->relation=='پدر') selected @endif>پدر</option>
-                                            <option value="مادر" @if($user->relation=='مادر') selected @endif>مادر</option>
-                                            <option value="پدربزرگ" @if($user->relation=='پدربزرگ') selected @endif>پدربزرگ</option>
-                                            <option value="مادربزرگ" @if($user->relation=='مادربزرگ') selected @endif>مادربزرگ</option>
-                                            <option value="قیم" @if($user->relation=='قیم') selected @endif>قیم</option>
-                                        </select>
+                                        <label for="company" class="form-label">شرکت</label>
+                                        <input type="text" id="company" name="company" class="form-control" value="{{ $user->company }}" placeholder="نام شرکت را وارد نمایید.">
                                     </div>
                                 </div>
                                 @role('administrator')
                                 <div class="col-lg-6">
-                                        <div class="mb-3">
-                                            <label for="status" class="form-label">وضعیت کاربر</label>
-                                            <select class="form-select" id="status" name="status">
-                                                <option value="1" @if($user->status=='0') selected @endif>مشغول به تحصیل در مجتمع</option>
-                                                <option value="2" @if($user->status=='1') selected @endif>جدیدالورود</option>
-                                            </select>
-                                        </div>
+                                    <div class="mb-3">
+                                        <label for="status" class="form-label">وضعیت کاربر</label>
+                                        <select class="form-select" id="status" name="status">
+                                            <option value="0" @if($user->status == 0) selected @endif>فعال</option>
+                                            <option value="1" @if($user->status == 1) selected @endif>غیرفعال</option>
+                                        </select>
+                                    </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="mb-3">
@@ -67,7 +60,6 @@
                                             @foreach($roles as $role)
                                                 <option value="{{$role->name}}" @if($userRoles[0] == $role->name) selected @endif>{{$role->name}}</option>
                                             @endforeach
-
                                         </select>
                                     </div>
                                 </div>
